@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compbuild Studio Tools — Wiki</title>
+<style>
+:root{--bg:#0e1014;--panel:#14171d;--panel2:#1a1e26;--border:#262b34;--fg:#e7e9ee;--dim:#9aa3b2;--accent:#f2a03a;--accent2:#4ef288;--link:#f2a03a;--code:#0b0d11}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+.layout{display:flex;min-height:100vh}
+.side{position:sticky;top:0;align-self:flex-start;width:270px;height:100vh;overflow-y:auto;background:var(--panel);border-right:1px solid var(--border);padding:22px 16px}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 16px;border-bottom:1px solid var(--border);margin-bottom:12px}
+.brand .mark{width:26px;height:26px;border-radius:6px;background:linear-gradient(135deg,var(--accent),#c97b18);flex:0 0 auto}
+.brand b{font-size:15px;letter-spacing:.2px}
+.brand small{display:block;color:var(--dim);font-size:11px;font-weight:400}
+.side nav{display:flex;flex-direction:column;gap:2px}
+.side nav a{color:var(--dim);padding:7px 10px;border-radius:7px;font-size:14px}
+.side nav a:hover{background:var(--panel2);color:var(--fg);text-decoration:none}
+.side nav a.active{background:var(--panel2);color:var(--accent)}
+main{flex:1;min-width:0;max-width:860px;margin:0 auto;padding:44px 40px 120px}
+section{scroll-margin-top:20px;padding-bottom:28px;margin-bottom:28px;border-bottom:1px solid var(--border)}
+section:last-child{border-bottom:none}
+h1{font-size:30px;margin:.2em 0 .5em;line-height:1.2}
+h2{font-size:22px;margin:1.4em 0 .5em;padding-top:.2em}
+h3{font-size:17px;margin:1.2em 0 .4em;color:#cfd4de}
+h1,h2,h3{scroll-margin-top:20px}
+p{margin:.7em 0}
+ul,ol{padding-left:1.4em}
+li{margin:.25em 0}
+code{background:var(--code);border:1px solid var(--border);border-radius:4px;padding:.1em .35em;font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre{background:var(--code);border:1px solid var(--border);border-radius:9px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;border:none;padding:0}
+blockquote{margin:1em 0;padding:.4em 1em;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 8px 8px 0;color:#d7dbe3}
+blockquote p{margin:.3em 0}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:14px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--border);padding:8px 11px;text-align:left}
+th{background:var(--panel2);color:var(--accent)}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+hr{border:none;border-top:1px solid var(--border);margin:1.6em 0}
+kbd{background:var(--panel2);border:1px solid var(--border);border-bottom-width:2px;border-radius:5px;padding:.05em .45em;font:12px ui-monospace,monospace}
+.topbar{display:none}
+@media (max-width:820px){
+ .side{position:fixed;left:0;top:0;transform:translateX(-100%);transition:transform .2s;z-index:20;box-shadow:0 0 40px rgba(0,0,0,.5)}
+ .side.open{transform:none}
+ .topbar{display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;background:var(--panel);border-bottom:1px solid var(--border);padding:12px 16px}
+ .topbar button{background:var(--panel2);color:var(--fg);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:14px}
+ main{padding:24px 18px 100px}
+}
+@media (prefers-color-scheme:light){
+ :root{--bg:#f6f7f9;--panel:#fff;--panel2:#eef1f5;--border:#e0e4ea;--fg:#1b1f27;--dim:#5b6472;--code:#f2f4f7;--link:#b5710f;--accent:#c97b18}
+ tr:nth-child(even) td{background:rgba(0,0,0,.02)}
+}
+</style>
+</head>
+<body>
+<div class="topbar"><button id="menu">☰ Menu</button><b>Compbuild Studio Tools</b></div>
+<div class="layout">
+<aside class="side">
+  <div class="brand"><span class="mark"></span><span><b>Compbuild Studio Tools</b><small>Wiki · v4.0.0-beta</small></span></div>
+  <nav><a href="#home">Compbuild Studio Tools</a><a href="#installation">Installation</a><a href="#getting-started">Getting Started</a><a href="#controls">Controls</a><a href="#tools">Tools</a><a href="#materials-palettes-presets">Materials, Palettes &amp; Presets</a><a href="#top-bar-settings">Top Bar &amp; Settings</a><a href="#schematics">Schematics</a><a href="#multiplayer-paper">Multiplayer (Paper)</a><a href="#faq">FAQ</a></nav>
+</aside>
+<main>
+<section id="home"><div class="page"><h1 id="compbuild-studio-tools">Compbuild Studio Tools</h1>
+<p>An original, in-game <strong>CAD-style world editor</strong> for <strong>Minecraft Java 1.21.11
+(Fabric)</strong> — a docked editor with a tool rail, live previews, reversible
+history, and a clean monochrome/orange UI. Build fast in singleplayer, or on a
+Paper server with the companion plugin.</p>
+<blockquote>
+<p><strong>Beta build — expect bugs, and more tools and fixes are still coming.</strong>
+Not affiliated with Axiom.</p>
+</blockquote>
+<hr />
+<h2 id="what-it-does">What it does</h2>
+<ul>
+<li><strong>Selections &amp; block ops</strong> — box-select, fill, delete, replace, copy/cut/paste,
+  all undoable.</li>
+<li><strong>Terrain sculpting</strong> — twelve brush moves (Raise, Smooth, Cliff, Slope, …)
+  with falloff curves and natural edges.</li>
+<li><strong>Painting</strong> — re-skin surfaces or fill volumes with a single material,
+  a weighted <strong>noise palette</strong>, or a <strong>gradient</strong>.</li>
+<li><strong>Paths</strong> — roads, walls, drapes, smooth curves, and clipboard <strong>stamps</strong>
+  along clicked points, with a live textured preview.</li>
+<li><strong>Geometry</strong> — exact shapes (lines, circles, spheres, domes, cylinders…)
+  from a few points.</li>
+<li><strong>Transform</strong> — rotate a clipboard to <em>any</em> angle, scale per axis, mirror,
+  grid-snap, and place a textured ghost.</li>
+<li><strong>Biomes</strong> — paint biomes with the same noise patterns, undoably.</li>
+<li><strong>Schematics</strong> — import/export <code>.schem</code> / <code>.schematic</code> through a thumbnail
+  browser with named folders.</li>
+<li><strong>Materials</strong> — searchable picker (Air included), recent materials, and
+  <strong>named palettes</strong> you save and reuse.</li>
+<li><strong>Multiplayer</strong> — a <strong>Paper server plugin</strong> applies edits with authority,
+  server-side undo, permissions, and optional <strong>WorldGuard</strong> region respect.</li>
+</ul>
+<hr />
+<h2 id="start-here">Start here</h2>
+<ul>
+<li><strong><a href="#installation">Installation</a></strong> — get the mod (and, for servers, the plugin) running.</li>
+<li><strong><a href="#getting-started">Getting Started</a></strong> — open the editor and make your first edit.</li>
+<li><strong><a href="#controls">Controls</a></strong> — every key and click.</li>
+<li><strong><a href="#tools">Tools</a></strong> — the full tool reference.</li>
+<li><strong><a href="Materials, Palettes &amp; Presets">Materials, Palettes &amp; Presets</a></strong> — materials, Air, recents, palettes, presets.</li>
+<li><strong><a href="#schematics">Schematics</a></strong> — import/export builds.</li>
+<li><strong><a href="#multiplayer-paper">Multiplayer (Paper)</a></strong> — server setup, WorldGuard, config, troubleshooting.</li>
+<li><strong><a href="Top Bar &amp; Settings">Top Bar &amp; Settings</a></strong> — the File/Edit/Settings/Help menus.</li>
+<li><strong><a href="#faq">FAQ</a></strong> — common questions.</li>
+</ul>
+<hr />
+<h2 id="requirements">Requirements</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Minecraft</td>
+<td>1.21.11 (Java Edition)</td>
+</tr>
+<tr>
+<td>Loader</td>
+<td>Fabric Loader ≥ 0.19.3 + Fabric API</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>21+</td>
+</tr>
+<tr>
+<td>Server (optional)</td>
+<td>Paper/Spigot 1.21.x for multiplayer</td>
+</tr>
+</tbody>
+</table></div></section><section id="installation"><div class="page"><h1 id="installation">Installation</h1>
+<p>There are two jars. Most players only need the <strong>client mod</strong>. The <strong>Paper
+plugin</strong> is only for editing on a multiplayer server.</p>
+<table>
+<thead>
+<tr>
+<th>Jar</th>
+<th>Where it goes</th>
+<th>Who needs it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>compbuild-studio-tools-&lt;version&gt;.jar</code></td>
+<td>your Minecraft <strong><code>mods/</code></strong> folder</td>
+<td>every player</td>
+</tr>
+<tr>
+<td><code>compbuild-studio-tools-paper-&lt;version&gt;.jar</code></td>
+<td>the server's <strong><code>plugins/</code></strong> folder</td>
+<td>the server admin (multiplayer only)</td>
+</tr>
+</tbody>
+</table>
+<p>Both jars are built together, so they always share a wire protocol — see
+<a href="#faq">FAQ</a> on version compatibility.</p>
+<h2 id="client-mod-players">Client mod (players)</h2>
+<ol>
+<li>Install <strong>Fabric Loader</strong> (≥ 0.19.3) for Minecraft <strong>1.21.11</strong>, and
+   <strong><a href="https://modrinth.com/mod/fabric-api">Fabric API</a></strong>.</li>
+<li>Drop <code>compbuild-studio-tools-&lt;version&gt;.jar</code> into your instance's <strong><code>mods/</code></strong>
+   folder. (In the vanilla launcher this is <code>&lt;game-dir&gt;/mods</code>; in
+   MultiMC/Prism/CurseForge it's that instance's <code>mods</code> folder.)</li>
+<li>Make sure there's only <strong>one</strong> Compbuild jar in there — remove older copies.</li>
+<li><strong>Fully restart</strong> Minecraft (not just leave/rejoin a world).</li>
+<li>Press <strong>Home</strong> in‑game to open the editor.</li>
+</ol>
+<p><strong>Confirm it loaded:</strong> the log prints
+<code>Compbuild net: multiplayer bridge registered on channel compbuild:edit1 …</code>
+at startup, and <strong>Home</strong> opens the docked editor.</p>
+<h3 id="downloading-a-build">Downloading a build</h3>
+<p>Grab the jars from the repository's <strong>GitHub Actions</strong> — open the latest green
+run and download the <code>compbuild-studio-tools-jar</code> (client) and
+<code>compbuild-studio-tools-paper-jar</code> (plugin) artifacts. Artifacts are <strong>zips</strong>;
+unzip and use the <code>.jar</code> inside (putting the zip in <code>mods/</code> does nothing).</p>
+<h2 id="paper-plugin-servers">Paper plugin (servers)</h2>
+<p>See <strong><a href="#multiplayer-paper">Multiplayer (Paper)</a></strong> for the full setup, but in short:</p>
+<ol>
+<li>Put <code>compbuild-studio-tools-paper-&lt;version&gt;.jar</code> in the server's <code>plugins/</code>.</li>
+<li>Restart. The console prints
+   <code>Compbuild Studio Tools server companion enabled (protocol v1, channel compbuild:edit1).</code></li>
+<li>Grant editors the <strong><code>compbuild.edit</code></strong> permission (default: op).</li>
+<li>Join with the client mod installed — chat shows <strong>"Server link active"</strong>.</li>
+</ol>
+<h2 id="compatibility">Compatibility</h2>
+<ul>
+<li><strong>Minecraft:</strong> 1.21.11 (Java). Other versions are not supported.</li>
+<li><strong>Java:</strong> 21+ (required by Minecraft 1.21).</li>
+<li><strong>Singleplayer</strong> works out of the box. <strong>Multiplayer</strong> needs the Paper plugin
+  (see <a href="#multiplayer-paper">Multiplayer (Paper)</a>).</li>
+</ul></div></section><section id="getting-started"><div class="page"><h1 id="getting-started">Getting Started</h1>
+<h2 id="open-the-editor">Open the editor</h2>
+<p>Press <strong>Home</strong> to open the docked editor: a <strong>tool rail</strong> on the left, a
+<strong>Tool Options</strong> panel on the right, and a status bar. The world stays visible
+behind the panels — it's a viewport, not a menu. Press <strong>Esc</strong> or <strong>Home</strong>
+again to close it (and the in-world selection/clipboard visuals vanish while
+it's closed — they come back when you reopen).</p>
+<h2 id="look-vs-cursor">Look vs. cursor</h2>
+<p>While the editor is open you're either <strong>flying/looking</strong> or using the
+<strong>cursor</strong>:</p>
+<ul>
+<li><strong>Move the mouse</strong> to look around (free camera). <strong>W A S D</strong> move,
+  <strong>Space / Shift</strong> go up/down, <strong>Left-Ctrl</strong> is faster.</li>
+<li>Press <strong>Esc</strong> (or tap <strong>Left-Alt</strong>) to release the <strong>cursor</strong> so you can click
+  panels and blocks. <strong>Esc</strong> again returns to flying; a third <strong>Esc</strong> closes the
+  editor.</li>
+</ul>
+<p>There's no crosshair — the <strong>block you're aiming at is outlined</strong>, and that's
+your pointer. Terrain/paint tools show a <strong>brush ring</strong> there too.</p>
+<h2 id="your-first-edits">Your first edits</h2>
+<p><strong>Fill a box</strong></p>
+<ol>
+<li>Aim at one corner block and press <strong>B</strong> (or click it in cursor mode).</li>
+<li>Aim at the opposite corner and press <strong>B</strong> again — chat shows the size.</li>
+<li>Hold a block (or pick a material) and press <strong>F</strong> to fill. <strong>G</strong> clears to
+   air; <strong>R</strong> re-skins non-air blocks.</li>
+</ol>
+<p><strong>Copy &amp; paste</strong></p>
+<ol>
+<li>With a selection, press <strong>C</strong> to copy.</li>
+<li>Look where you want it and press <strong>V</strong> — or plant the ghost with a click to
+   position it with gizmos, then place.</li>
+</ol>
+<p><strong>Undo anything</strong></p>
+<ul>
+<li><strong>Ctrl+Z</strong> undoes; <strong>Ctrl+Y</strong> redoes. Every edit is reversible.</li>
+</ul>
+<h2 id="pick-a-material">Pick a material</h2>
+<p>Open the <strong>MATERIAL</strong> tab (top-right) and click the material row to open the
+<strong>picker</strong> — type to search, click a block. <strong>Air is the first entry</strong> (it
+erases). Your last 10 materials live in the <strong>RECENT</strong> tab, and you can save
+<strong>named palettes</strong> — see <strong><a href="Materials, Palettes &amp; Presets">Materials, Palettes &amp; Presets</a></strong>.</p>
+<h2 id="try-a-tool">Try a tool</h2>
+<p>Click a tool in the rail (hover any icon for its name), then read its
+one‑line <strong>?</strong> description on the Tool Options title bar. Good first tools:</p>
+<ul>
+<li><strong>Sculpt</strong> — point at the ground and click/hold to raise terrain.</li>
+<li><strong>Path</strong> — click points to lay a road; <strong>Build path</strong> commits it.</li>
+<li><strong>Transform</strong> — copy something, then rotate/scale the ghost and click to place.</li>
+</ul>
+<p>Full details in <strong><a href="#tools">Tools</a></strong> and <strong><a href="#controls">Controls</a></strong>.</p>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><strong><a href="#controls">Controls</a></strong> — the complete key/mouse reference.</li>
+<li><strong><a href="#schematics">Schematics</a></strong> — import and export builds.</li>
+<li><strong><a href="#multiplayer-paper">Multiplayer (Paper)</a></strong> — edit on a server.</li>
+</ul></div></section><section id="controls"><div class="page"><h1 id="controls">Controls</h1>
+<p>All keys are rebindable in <strong>Options → Controls → Compbuild Studio Tools</strong>
+(the mod has its own category). Defaults:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Home</strong></td>
+<td>Open/close the docked editor (<strong>Esc</strong> also closes)</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>Set a selection corner from the block you're looking at</td>
+</tr>
+<tr>
+<td><strong>G</strong></td>
+<td>Delete the selection (clear to air)</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>Copy the selection to the clipboard</td>
+</tr>
+<tr>
+<td><strong>V</strong></td>
+<td>Paste at the block you're looking at</td>
+</tr>
+<tr>
+<td><strong>R</strong></td>
+<td>Rotate the clipboard 90° clockwise</td>
+</tr>
+<tr>
+<td><strong>F</strong></td>
+<td>Flip (mirror) the clipboard</td>
+</tr>
+<tr>
+<td><strong>Ctrl + Z</strong></td>
+<td>Undo</td>
+</tr>
+<tr>
+<td><strong>Ctrl + Y</strong></td>
+<td>Redo</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fill</strong> and <strong>Replace</strong> are <strong>unbound by default</strong> (R/F now rotate/flip the
+clipboard) — they're on the <strong>Edit</strong> menu and <strong>ACTIONS</strong> panel, and you can
+bind them to any key in Options → Controls.</p>
+<h2 id="navigation-editor-open">Navigation (editor open)</h2>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Move mouse</strong></td>
+<td>Look around (free camera)</td>
+</tr>
+<tr>
+<td><strong>Esc</strong></td>
+<td>Flying → cursor; <strong>Esc again</strong> closes the editor</td>
+</tr>
+<tr>
+<td><strong>Tap Left-Alt</strong></td>
+<td>Toggle look ↔ cursor</td>
+</tr>
+<tr>
+<td><strong>W / A / S / D</strong></td>
+<td>Move / strafe</td>
+</tr>
+<tr>
+<td><strong>Space / Left-Shift</strong></td>
+<td>Up / down</td>
+</tr>
+<tr>
+<td><strong>Left-Ctrl</strong></td>
+<td>Move faster</td>
+</tr>
+<tr>
+<td><strong>Mouse wheel</strong></td>
+<td>Fly speed (or brush/path size in those tools)</td>
+</tr>
+<tr>
+<td><strong>Middle-click</strong></td>
+<td><strong>Eyedropper</strong> — adopt the block under the cursor (exact states)</td>
+</tr>
+</tbody>
+</table>
+<p>There's no crosshair — the <strong>block you're aiming at is outlined</strong>; that's your
+pointer. To click a tool or panel, release the cursor with <strong>Esc</strong> or <strong>Left-Alt</strong>.</p>
+<h2 id="cursor-mode-clicks">Cursor-mode clicks</h2>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Click</strong></td>
+<td>Use the active tool at the outlined block</td>
+</tr>
+<tr>
+<td><strong>Two clicks</strong></td>
+<td>Make a selection box</td>
+</tr>
+<tr>
+<td><strong>Click a carried ghost</strong></td>
+<td><strong>Plant</strong> it — arrows move, ring rotates, check places</td>
+</tr>
+<tr>
+<td><strong>Right-click a ghost</strong></td>
+<td>Pick a planted ghost back up; again drops the clipboard</td>
+</tr>
+<tr>
+<td><strong>Ctrl + wheel</strong> (carrying a clipboard)</td>
+<td>Lift/sink the ghost (place below surface)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="screen-shortcuts-editor-focused">Screen shortcuts (editor focused)</h2>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ctrl + C</strong></td>
+<td>Copy the selection</td>
+</tr>
+<tr>
+<td><strong>Ctrl + X</strong></td>
+<td>Cut (copy, then clear)</td>
+</tr>
+<tr>
+<td><strong>Ctrl + V</strong></td>
+<td>Paste at the hovered block</td>
+</tr>
+<tr>
+<td><strong>Ctrl + Z / Ctrl + Y</strong></td>
+<td>Undo / redo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="wheel-modifiers-by-tool">Wheel modifiers by tool</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Wheel</th>
+<th>Shift + wheel</th>
+<th>Ctrl + wheel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sculpt</td>
+<td>Radius</td>
+<td>Strength</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Paint</td>
+<td>Radius</td>
+<td>—</td>
+<td>Depth</td>
+</tr>
+<tr>
+<td>Path</td>
+<td>Width</td>
+<td>Height</td>
+<td>Slack / Stamp spacing</td>
+</tr>
+<tr>
+<td>Array</td>
+<td>—</td>
+<td>—</td>
+<td>Copy count</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Tip:</strong> the <strong>Help → Controls</strong> overlay in-game shows this same cheat-sheet
+on one card (Esc or click closes it).</p>
+</blockquote></div></section><section id="tools"><div class="page"><h1 id="tools">Tools</h1>
+<p>The left <strong>rail</strong> holds every tool (hover an icon for its name). The active
+tool's settings appear in the right <strong>Tool Options</strong> panel, whose title bar has
+a <strong>?</strong> button (a short description of the tool) and, for Sculpt/Paint/Biome,
+three <strong>preset slots</strong> — see <a href="Materials, Palettes &amp; Presets">Materials, Palettes &amp; Presets</a>.</p>
+<p>Most numeric values are <strong>draggable sliders</strong> (click the track to jump, drag
+the knob); some use −/＋ steppers or cycle chips. Every control <strong>explains
+itself on hover</strong>.</p>
+<hr />
+<h2 id="select-pointer">Select (pointer)</h2>
+<p>The neutral pointer. Aim and click to box-select (first click a corner, second
+completes the box). A carried clipboard can be <strong>planted</strong> and placed here too.
+Clicking away from the selection clears it.</p>
+<h2 id="selection">Selection</h2>
+<p>Two clicks make a box. Drag its <strong>arrows</strong> to move, its <strong>edges</strong> to resize,
+and the gold <strong>ring</strong> to rotate 90°. The right panel shows size/volume, a
+<strong>Confirm selection</strong> button, <strong>New</strong>/<strong>Clear</strong>, and rotate/nudge controls
+under <strong>More…</strong>.</p>
+<h2 id="sculpt-terrain">Sculpt (terrain)</h2>
+<p>Raises, lowers, and reshapes terrain under the brush. Pick a <strong>Type</strong> from the
+grid (icons + hover text), set <strong>Radius</strong> and <strong>Intensity</strong>, then click or
+<strong>hold</strong> on the ground.</p>
+<p><strong>Types (12):</strong> Raise · Lower · Smooth · Flatten · Noise · Erode · <strong>Extrude</strong>
+(pull the footprint straight up, hard-edged) · <strong>Cliff</strong> (terrace into flat
+steps) · <strong>Roughen</strong> (light scattered pitting) · <strong>Distort</strong> (rolling
+world-anchored waves) · <strong>Shatter</strong> (break into sunken slabs along Voronoi
+seams) · <strong>Slope</strong> — a ramp you can <strong>press-and-drag</strong> from one end to the
+other (live preview, sweep left/right) or place with <strong>two clicks</strong> (one end,
+then the other); a single graded ramp connects the points.</p>
+<p><strong>Falloff</strong> is a curve picker: <strong>Flat</strong>, <strong>Smooth</strong> (rounded dome), <strong>Linear</strong>,
+<strong>Plateau</strong> (flat top then drop), <strong>Spike</strong>, <strong>Round</strong> (spherical cap). <strong>Edge</strong>
+= <strong>Natural</strong> (organically wobbled rim, never a perfect circle) or <strong>Exact</strong>.
+<strong>Stroke</strong> = <strong>Flow</strong> (hold-and-drag continuous) or <strong>Tap</strong> (one apply/click).</p>
+<h2 id="paint">Paint</h2>
+<p>Re-skins the terrain <strong>Surface</strong> (a few layers deep) or fills the brush
+<strong>Volume</strong> with your material.</p>
+<ul>
+<li><strong>Mode:</strong> <strong>Single</strong> (one material), <strong>Noise</strong> (a weighted <strong>palette</strong> shaped
+  by a pattern), or <strong>Gradient</strong> (radial fade through the palette).</li>
+<li><strong>Patterns:</strong> Smooth (rolling blobs) · Cells (Voronoi patches) · Cracks (thin
+  boundary lines) · Blobs (lava-lamp metaballs) · Static (per-block mix) ·
+  Scatter (blobs with dithered edges), with a live preview swatch and a <strong>Size</strong>.</li>
+</ul>
+<h2 id="paint-brush">Paint Brush</h2>
+<p>Freehand block placing: paints your material wherever you click or drag, using
+the current brush shape and radius.</p>
+<h2 id="gradient">Gradient</h2>
+<p>A Photoshop-style dithered fade between <strong>two material swatches</strong> (A → B).
+Choose <strong>Linear</strong> or <strong>Radial</strong>, run it along the selection's tallest axis or
+<strong>click two blocks</strong> to aim the fade at any angle, then <strong>Apply</strong>.</p>
+<h2 id="transform-clipboard">Transform (clipboard)</h2>
+<p>Shapes the <strong>clipboard</strong> before you place it. Copy something, then:</p>
+<ul>
+<li><strong>Rotate</strong> to any angle (15° steps or ±90 chips) — block <em>positions</em> rotate
+  exactly; block <em>states</em> snap to the nearest 90° (stairs can't face 37°).</li>
+<li><strong>Scale</strong> per axis or uniformly (Lock/Free).</li>
+<li><strong>Mirror</strong>, and <strong>snap</strong> placement to a grid (off/2/4/8/16).</li>
+</ul>
+<p>A textured ghost shows the exact result on top of the block you point at; click
+to place (and place again — settings stay until <strong>Reset</strong>).</p>
+<h2 id="array">Array</h2>
+<p>Places repeated copies of the clipboard in a line: set the count with
+<strong>Ctrl+wheel</strong>, then click a block to set the step direction/spacing. Air is
+skipped so copies overlay terrain.</p>
+<h2 id="path">Path</h2>
+<p>Click to drop points; a <strong>live ghost</strong> shows the exact blocks the path will
+place. A bottom-right card holds Type/Width/Height/Slack/Build/Clear.</p>
+<p><strong>Types:</strong> <strong>Line</strong> (1-wide) · <strong>Band</strong> (adjustable-width road/wall) · <strong>Drape</strong>
+(sags like rope; Invert arches) · <strong>Smooth</strong> (curve through every point) ·
+<strong>Curve</strong> (pulled toward interior points) · <strong>Stamp</strong> (repeats the <strong>clipboard</strong>
+at a spacing — copy something first).</p>
+<p>Wheel = width, Shift+wheel = height, Ctrl+wheel = slack/spacing.</p>
+<h2 id="geometry">Geometry</h2>
+<p>Plots exact shapes from a few clicked points — lines, circles, spheres, domes,
+cylinders and more, hollow or filled. <strong>Keep existing</strong> places into air only.</p>
+<h2 id="biome">Biome</h2>
+<p>Paints <strong>biomes</strong> with the same noise patterns as Paint: build a weighted biome
+palette (<strong>+ Biome</strong> opens the chooser), pick Pattern/Size/Radius/Shape, and
+click. Applied via vanilla <code>/fillbiome</code>; each stroke snapshots what it replaced,
+so <strong>Ctrl+Z paints the old biomes back</strong> while the Biome tool is active.</p>
+<hr />
+<p>Every geometry edit is a single <strong>undoable</strong> operation backed by the same
+tested engine. See <strong><a href="#controls">Controls</a></strong> for keys and <strong><a href="#multiplayer-paper">Multiplayer (Paper)</a></strong>
+for how tools behave on a server.</p></div></section><section id="materials-palettes-presets"><div class="page"><h1 id="materials-palettes-presets">Materials, Palettes &amp; Presets</h1>
+<p>The <strong>right panel</strong> has three tabs: <strong>MATERIAL</strong> (what you place), <strong>RECENT</strong>
+(your last materials), and <strong>PROPS</strong> (the context inspector).</p>
+<h2 id="the-material-picker">The material picker</h2>
+<p>Click the material row (or a gradient swatch, or press the eyedropper) to open
+the picker <strong>as an overlay</strong> — the tools stay visible behind it. <strong>Type to
+search</strong>, click a block to choose it, or click <strong>✕</strong> / outside to close.</p>
+<ul>
+<li><strong>Air is the first entry</strong> (a hollow slashed square). Painting, filling, or
+  building with <strong>Air erases</strong> — a brush-shaped delete, a fill-as-clear, a
+  geometry-as-carve.</li>
+<li><strong>Middle-click</strong> any block in the world to <strong>eyedrop</strong> it as the material,
+  exact block states included.</li>
+<li>Blocks with <strong>states</strong> (stairs facing, log axis…) show cyclable property rows
+  under the material.</li>
+</ul>
+<h2 id="recent-materials">Recent materials</h2>
+<p>The <strong>RECENT</strong> tab lists your last <strong>10</strong> materials — picked, eyedropped, or
+swapped — newest first, with the active one marked. Click any to use it again.</p>
+<h2 id="named-palettes">Named palettes</h2>
+<p>Under the <strong>MATERIAL</strong> tab, the <strong>PALETTES</strong> section saves <strong>named material
+sets</strong> — "sandstone set", "nether reds", etc.</p>
+<ul>
+<li><strong>+ Save current as palette…</strong> names and stores the current <strong>Paint</strong> palette,
+  or (if that's empty) your recent materials — whichever you've been curating.</li>
+<li>Each saved palette is a row; click it to <strong>expand its swatches</strong>. Click a
+  swatch to make it the active material.</li>
+<li><strong>&gt;P</strong> loads the whole palette into the <strong>Paint tool</strong> (swap your entire noise
+  mix in one click). <strong>x</strong> deletes it.</li>
+<li>Palettes persist across restarts (ordered, capped at 24).</li>
+</ul>
+<h2 id="per-tool-presets">Per-tool presets</h2>
+<p><strong>Sculpt</strong>, <strong>Paint</strong>, and <strong>Biome</strong> each have <strong>three preset slots</strong> on the
+Tool Options title bar:</p>
+<ul>
+<li>Click an <strong>empty</strong> slot to save the current setup.</li>
+<li>Click a <strong>filled</strong> slot to load it.</li>
+<li>Click <strong>+</strong> first to arm an <strong>overwrite</strong> of a filled slot.</li>
+</ul>
+<p>A preset captures that tool's knobs (radius, strength, shape, falloff, mode,
+palette, etc.).</p>
+<h2 id="persistence">Persistence</h2>
+<p>Everything above — every tool's knobs, the paint/biome palettes, the active
+material and recents, your <strong>named palettes</strong>, and all presets — is written to
+<strong><code>config/compbuildtools-settings.json</code></strong> when the editor closes and restored
+next launch. A missing or corrupt file just means defaults; it never blocks
+startup.</p></div></section><section id="top-bar-settings"><div class="page"><h1 id="top-bar-settings">Top Bar &amp; Settings</h1>
+<p>The top bar has four menus, plus the tool rail and status bar.</p>
+<h2 id="file">File</h2>
+<ul>
+<li><strong>Import schematic…</strong> — the thumbnail browser (<a href="#schematics">Schematics</a>).</li>
+<li><strong>Save clipboard as .schem…</strong> — export the clipboard.</li>
+<li><strong>Open schematics folder</strong> — open <code>&lt;game&gt;/schematics</code> in your OS file browser.</li>
+</ul>
+<h2 id="edit">Edit</h2>
+<p>The full edit set, grouped with its shortcuts:</p>
+<ul>
+<li><strong>Undo</strong> / <strong>Redo</strong></li>
+<li><strong>Cut</strong> / <strong>Copy</strong> / <strong>Paste</strong></li>
+<li><strong>Fill selection</strong> / <strong>Delete to air</strong> / <strong>Replace with held</strong></li>
+<li><strong>Clear selection</strong> / <strong>Drop clipboard</strong></li>
+</ul>
+<h2 id="settings">Settings</h2>
+<p>Editor-wide view preferences:</p>
+<ul>
+<li><strong>Look speed</strong> — mouse sensitivity while flying.</li>
+<li><strong>UI scale</strong> — panel density / crispness (1–4).</li>
+<li><strong>Gizmos</strong> — Shown/Hidden. Hides the in-world selection/brush overlays for a
+  clean screenshot. <em>Stroking still applies edits while hidden.</em></li>
+<li><strong>Ghost preview</strong> — Shown/Hidden. Hides the clipboard/path build previews.</li>
+<li><strong>Restore view defaults</strong> — reset the above.</li>
+<li><strong>Font</strong> — whether the bundled <strong>Manrope</strong> font bound, or the vanilla
+  fallback (a diagnostic row).</li>
+<li><strong>Server</strong> — the multiplayer link status: <code>linked — plugin vX</code>,
+  <code>refused — …</code>, <code>no reply …</code>, or <code>n/a (singleplayer)</code>. See
+  <a href="#multiplayer-paper">Multiplayer (Paper)</a>.</li>
+</ul>
+<blockquote>
+<p>Closing the editor hides <strong>all</strong> in-world editor visuals (selection, clipboard
+ghost, path/geometry/slope/gradient previews). Nothing is deleted — reopening
+restores them.</p>
+</blockquote>
+<h2 id="help">Help</h2>
+<ul>
+<li><strong>Controls…</strong> — a modal cheat-sheet of every key and click (Esc/click closes).</li>
+<li><strong>Tool guide: the ? button</strong> — points you at the per-tool <strong>?</strong> descriptions.</li>
+<li><strong>About</strong> — name, version, and the beta notice.</li>
+</ul>
+<h2 id="tool-options-the-tool-rail">Tool Options &amp; the tool rail</h2>
+<p>The right <strong>Tool Options</strong> panel shows the active tool's settings (draggable
+sliders, steppers, cycle chips), a <strong>?</strong> description, and — for Sculpt/Paint/
+Biome — three <strong>preset slots</strong> (<a href="Materials, Palettes &amp; Presets">Materials, Palettes &amp; Presets</a>).</p>
+<p>The <strong>rail</strong> is a floating grid that wraps into more columns so every tool is
+visible at any resolution. <strong>Drag the white logo</strong> to move it; <strong>drag its right
+edge</strong> to enlarge the icons. Hover any icon for its name.</p>
+<p>The <strong>right inspector</strong> is resizable — <strong>drag its left edge</strong> to widen or narrow
+it, so a cut-off label or value (e.g. in PROPS) gets room.</p></div></section><section id="schematics"><div class="page"><h1 id="schematics">Schematics</h1>
+<p>The <strong>File</strong> menu (top bar) imports and exports builds through the
+<code>&lt;game&gt;/schematics</code> folder.</p>
+<h2 id="import">Import</h2>
+<p><strong>File → Import schematic…</strong> opens a <strong>thumbnail browser</strong>:</p>
+<ul>
+<li>Every <code>.schem</code> / <code>.schematic</code> shows as a small isometric preview (loaded
+  lazily, cached).</li>
+<li>Organise files into <strong>named folders</strong> inside <code>schematics/</code> (up to 5 levels
+  deep) — click a folder to enter, <code>..</code> to go up.</li>
+<li>Click a file for a big preview with size, block count, and any blocks this
+  game version can't map (imported as air, counted honestly).</li>
+<li><strong>Import</strong> loads it onto the clipboard, named after the file, ready to place
+  like any copy.</li>
+</ul>
+<h2 id="export">Export</h2>
+<p><strong>File → Save clipboard as .schem…</strong> asks for a <strong>name</strong> and writes a <strong>Sponge
+v2 <code>.schem</code></strong> (the format WorldEdit/Axiom read). The clipboard card shows the
+name, and its thumbnail matches what you'd paste — including the Transform
+tool's pending rotation/scale.</p>
+<h2 id="formats-fidelity">Formats &amp; fidelity</h2>
+<ul>
+<li><strong><code>.schem</code></strong> — Sponge v1–3 read, v2 write. The primary format.</li>
+<li><strong><code>.schematic</code></strong> — legacy MCEdit import, best-effort: common building blocks
+  map to their modern names; anything unmappable is <strong>skipped and reported</strong>.</li>
+<li><strong>Block entities</strong> (chest contents, sign text) are <strong>not</strong> preserved on
+  multiplayer paste — see <a href="#multiplayer-paper">Multiplayer (Paper)</a> limitations.</li>
+</ul>
+<h2 id="open-the-folder">Open the folder</h2>
+<p><strong>File → Open schematics folder</strong> opens <code>&lt;game&gt;/schematics</code> in your OS file
+browser (or prints the path to chat if it can't), handy for adding files or
+folders from outside the game.</p></div></section><section id="multiplayer-paper"><div class="page"><h1 id="multiplayer-paper">Multiplayer (Paper)</h1>
+<p>Compbuild Studio Tools edits multiplayer worlds through a <strong>server companion
+plugin</strong> for Paper/Spigot. The client mod computes each edit from what you can
+see; the plugin <strong>validates</strong> it (permission + size), <strong>applies</strong> it with full
+server authority in per-tick batches, and keeps your <strong>undo/redo history on the
+server</strong>. Everyone nearby sees the result immediately — other players don't need
+anything installed.</p>
+<h2 id="setup">Setup</h2>
+<ol>
+<li>Get both jars (built together; see <a href="#installation">Installation</a>):
+   - <code>compbuild-studio-tools-&lt;version&gt;.jar</code> — the <strong>client mod</strong> (players).
+   - <code>compbuild-studio-tools-paper-&lt;version&gt;.jar</code> — the <strong>plugin</strong> (server).</li>
+<li>Put the <strong>plugin</strong> jar in the server's <code>plugins/</code> folder and restart.</li>
+<li>Grant editors the <strong><code>compbuild.edit</code></strong> permission (default: <strong>op</strong>). Any
+   permissions plugin works:
+   <code>/lp user &lt;name&gt; permission set compbuild.edit true</code></li>
+<li>Join with the <strong>client mod</strong> installed. Chat shows
+   <strong>"Server link active (plugin vX): edits apply through the server…"</strong> — the
+   handshake succeeded, and every tool now works.</li>
+</ol>
+<p>Without the plugin (or the permission), world-editing tools decline with a
+message saying why. <strong>Copy and schematic export still work anywhere</strong> — they
+only read your view of the world.</p>
+<h2 id="how-it-works">How it works</h2>
+<ul>
+<li>On join the client greets the plugin on the <code>compbuild:edit1</code> channel; the
+  plugin replies with your permission and the server's edit-size limit.</li>
+<li>Every tool computes its change list exactly as in singleplayer, then ships
+  compact palette-compressed chunks instead of applying locally. The server
+  re-reads each block's previous state as it applies, so its undo history is
+  exact.</li>
+<li>Large edits apply spread across ticks (<code>blocks-per-tick</code>) so the server never
+  stalls; you get a progress overlay and an honest changed-block count.</li>
+<li><strong>Ctrl+Z / Ctrl+Y</strong> send undo/redo requests; the server replays <em>your</em>
+  per-player history.</li>
+</ul>
+<h2 id="region-protection-worldguard">Region protection (WorldGuard)</h2>
+<p>With <strong>WorldGuard</strong> installed and <code>respect-regions</code> on (default), edits honour
+region build permissions: a player who can't build in a region (and lacks
+WorldGuard bypass — ops and <code>worldguard.region.bypass.*</code> do) has the protected
+blocks <strong>skipped and counted</strong> (<code>"…128 blocks skipped (protected regions)."</code>).
+This makes the plugin safe to grant on servers that use regions.</p>
+<ul>
+<li>No WorldGuard → nothing to enforce; the permission node is the gate.</li>
+<li>WorldGuard + <code>respect-regions: false</code> → protection ignored (trusted editors
+  only).</li>
+<li>Undo/redo of your own edits is <strong>not</strong> re-gated, so a later region change
+  can't strand your undo.</li>
+</ul>
+<h2 id="configuration-pluginscompbuildstudiotoolsconfigyml">Configuration (<code>plugins/CompbuildStudioTools/config.yml</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max-blocks-per-edit</code></td>
+<td>1000000</td>
+<td>Hard per-edit ceiling; larger edits are rejected before any change.</td>
+</tr>
+<tr>
+<td><code>blocks-per-tick</code></td>
+<td>6000</td>
+<td>Apply rate; lower = smoother TPS/client FPS during edits (slower to finish), higher = faster but burstier.</td>
+</tr>
+<tr>
+<td><code>history-max-entries</code></td>
+<td>24</td>
+<td>Per-player undo depth.</td>
+</tr>
+<tr>
+<td><code>history-max-mb</code></td>
+<td>256</td>
+<td>Per-player history memory cap.</td>
+</tr>
+<tr>
+<td><code>edit-timeout-ticks</code></td>
+<td>600</td>
+<td>Discard half-uploaded edits after this long.</td>
+</tr>
+<tr>
+<td><code>respect-regions</code></td>
+<td>true</td>
+<td>Honour WorldGuard region build permissions.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="troubleshooting-the-handshake">Troubleshooting the handshake</h2>
+<p>If tools say the plugin isn't detected even though it's installed, walk the
+chain — each side leaves a breadcrumb:</p>
+<ol>
+<li><strong>Editor → Settings → "Server:" row.</strong> <code>linked — plugin vX</code> = success.
+   <code>no reply after N hellos</code> = greetings went out, nothing came back (continue).
+   <code>disabled …</code> = the client's networking failed to start (see the client log
+   for <code>Compbuild net</code>).</li>
+<li><strong>Server console at startup</strong> must show
+   <code>Compbuild Studio Tools server companion enabled (protocol v1…)</code>. If not, the
+   plugin didn't load — check for errors above it, and that the <strong>plugin</strong> jar
+   (not the client jar) is in <code>plugins/</code>.</li>
+<li><strong>Server console on join</strong> should show
+   <code>Compbuild handshake from &lt;name&gt;… : permitted</code>. If it does but the client
+   still reports no reply, look for a warning that the player hasn't announced
+   the channel.</li>
+<li>If the handshake line never appears, a <strong>proxy</strong> (Velocity/BungeeCord) may be
+   filtering the <code>compbuild:edit1</code> channel — allow it, or connect directly.</li>
+<li>Make sure you're on the <strong>current client jar</strong> — a stale jar is the most
+   common cause. The decline message and the Settings "Server:" row both change
+   wording between versions.</li>
+</ol>
+<h2 id="honest-limitations">Honest limitations</h2>
+<ul>
+<li><strong>Block entities carry no NBT</strong> — a pasted chest/sign arrives empty.</li>
+<li><strong>The Biome tool</strong> uses vanilla <code>/fillbiome</code>, so it needs vanilla command
+  permission (op) independent of the plugin.</li>
+<li><strong>History is per-session</strong> — leaving the server clears your server-side undo.</li>
+<li>Edits target loaded chunks (what you can see).</li>
+<li><strong>Fabric multiplayer servers</strong> aren't covered by a companion yet — the
+  protocol is platform-neutral, so a Fabric server module could follow.</li>
+</ul>
+<p>See also <strong><a href="#faq">FAQ</a></strong> for mod/plugin version compatibility.</p></div></section><section id="faq"><div class="page"><h1 id="faq">FAQ</h1>
+<h3 id="which-minecraft-version-does-it-need">Which Minecraft version does it need?</h3>
+<p><strong>1.21.11 (Java Edition)</strong> on <strong>Fabric</strong>, with Fabric API and Java 21. Other
+versions aren't supported.</p>
+<h3 id="does-it-work-in-singleplayer">Does it work in singleplayer?</h3>
+<p>Yes, out of the box. Multiplayer needs the <strong>Paper plugin</strong> — see
+<a href="#multiplayer-paper">Multiplayer (Paper)</a>.</p>
+<h3 id="if-my-mod-is-newer-than-the-plugin-or-vice-versa-does-it-still-work">If my mod is newer than the plugin (or vice-versa), does it still work?</h3>
+<p>It depends on the <strong>protocol version</strong>, not the release version. Both jars are
+built from the same shared protocol code, which carries a <code>PROTOCOL_VERSION</code>
+(currently <strong>1</strong>).</p>
+<ul>
+<li><strong>Same protocol version → it just works</strong>, even if the display versions
+  differ. Most updates (new tools, UI, fixes) don't change the wire format, so
+  the protocol stays 1 and mixed nearby versions interoperate. You don't have to
+  update both in lockstep.</li>
+<li><strong>Different protocol version → cleanly refused, not broken.</strong> A newer mod
+  against an older plugin gets an explicit handshake refusal in chat
+  (<em>"Protocol mismatch (client v2, server v1) — update the mod or the
+  plugin."</em>) and nothing is applied. It <strong>fails safe</strong>.</li>
+</ul>
+<p>Check <strong>Settings → the "Server:" row</strong> to see the current link state. Update
+both when release notes mention a protocol bump.</p>
+<h3 id="do-other-players-need-the-mod-to-see-my-edits">Do other players need the mod to see my edits?</h3>
+<p>No. The server applies edits with authority and vanilla broadcasts the changes,
+so everyone sees them. Only the <strong>editor</strong> needs the client mod (and the
+<code>compbuild.edit</code> permission).</p>
+<h3 id="is-it-safe-on-a-server-with-regionsclaims">Is it safe on a server with regions/claims?</h3>
+<p>With <strong>WorldGuard</strong> installed it respects region build permissions (blocks you
+can't build are skipped and counted). Without a protection plugin, the
+<code>compbuild.edit</code> permission is the only gate — grant it accordingly. See
+<a href="#multiplayer-paper">Multiplayer (Paper)</a>.</p>
+<h3 id="it-says-networking-failed-to-start-no-plugin-detected-what-now">It says "networking failed to start" / "no plugin detected". What now?</h3>
+<p>Almost always a <strong>stale client jar</strong> or a plugin that didn't load. Follow the
+<strong>Troubleshooting the handshake</strong> steps in <a href="#multiplayer-paper">Multiplayer (Paper)</a> — the
+in-game messages name the exact failing step.</p>
+<h3 id="can-i-edit-with-air">Can I edit with Air?</h3>
+<p>Yes — <strong>Air</strong> is the first entry in the material picker. Painting, filling, or
+building with Air <strong>erases</strong>. See <a href="Materials, Palettes &amp; Presets">Materials, Palettes &amp; Presets</a>.</p>
+<h3 id="are-my-settings-saved">Are my settings saved?</h3>
+<p>Yes. Every tool's knobs, palettes, the material and recents, named palettes, and
+presets are saved to <code>config/compbuildtools-settings.json</code> and restored next
+launch.</p>
+<h3 id="is-this-axiom">Is this Axiom?</h3>
+<p>No. It's <strong>original work</strong>, not affiliated with Axiom — a separate editor built
+for the Compbuild community. It's in <strong>beta</strong>; expect bugs, and more is coming.</p>
+<h3 id="how-do-i-report-a-bug">How do I report a bug?</h3>
+<p>Open an issue on the <a href="https://github.com/c0mputerrr/compbuildtools">repository</a>.
+Include your Minecraft/mod versions, whether it's singleplayer or a Paper
+server, and any relevant chat/console lines (the Settings "Server:" row and
+"Font:" row are useful for those areas).</p></div></section>
+</main>
+</div>
+<script>
+const links=[...document.querySelectorAll('.side nav a')];
+const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=map.get(e.target.id);if(a)a.classList.add('active');}});},{rootMargin:'-10% 0px -80% 0px'});
+document.querySelectorAll('section').forEach(s=>obs.observe(s));
+const side=document.querySelector('.side');
+document.querySelector('#menu')?.addEventListener('click',()=>side.classList.toggle('open'));
+document.querySelectorAll('.side nav a').forEach(a=>a.addEventListener('click',()=>side.classList.remove('open')));
+</script>
+</body>
+</html>
