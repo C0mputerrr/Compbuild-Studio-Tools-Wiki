@@ -6,7 +6,6 @@ history, and a clean monochrome/orange UI. Build fast in singleplayer, or on a
 Paper server with the companion plugin.
 
 > **Beta build — expect bugs, and more tools and fixes are still coming.**
-> Not affiliated with Axiom.
 
 ---
 

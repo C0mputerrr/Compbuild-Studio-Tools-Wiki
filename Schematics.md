@@ -19,14 +19,14 @@ The **File** menu (top bar) imports and exports builds through the
 ## Export
 
 **File → Save clipboard as .schem…** asks for a **name** and writes a **Sponge
-v2 `.schem`** (the format WorldEdit/Axiom read). The clipboard card shows the
+v2 `.schem`** (the widely-supported schematic format). The clipboard card shows the
 name, and its thumbnail matches what you'd paste — including the Transform
 tool's pending rotation/scale.
 
 ## Formats & fidelity
 
 - **`.schem`** — Sponge v1–3 read, v2 write. The primary format.
-- **`.schematic`** — legacy MCEdit import, best-effort: common building blocks
+- **`.schematic`** — legacy format import, best-effort: common building blocks
   map to their modern names; anything unmappable is **skipped and reported**.
 - **Block entities** (chest contents, sign text) are **not** preserved on
   multiplayer paste — see [[Multiplayer (Paper)]] limitations.
