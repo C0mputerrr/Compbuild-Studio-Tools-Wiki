@@ -1,0 +1,51 @@
+name: Sync docs to wiki
+
+# Mirrors the repo's root markdown pages into this repo's GitHub Wiki tab.
+# Runs whenever the docs change (or manually). Uses the built-in GITHUB_TOKEN,
+# which can write this repo's own wiki, so no PAT is needed. The wiki must have
+# been initialised once (create any page in the Wiki tab) so its git exists.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "*.md"
+      - ".github/workflows/sync-to-wiki.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Push markdown into the wiki
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          tmp="$(mktemp -d)"
+          if ! git clone "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git" "$tmp"; then
+            echo "::error::Wiki not initialised. Open the repo's Wiki tab, create any page once, then re-run."
+            exit 1
+          fi
+          # Mirror every root markdown page except README (that's the repo landing).
+          find "$tmp" -maxdepth 1 -name '*.md' -delete
+          for f in *.md; do
+            [ "$f" = "README.md" ] && continue
+            cp "$f" "$tmp/"
+          done
+          cd "$tmp"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Wiki already up to date."
+            exit 0
+          fi
+          git commit -m "Sync wiki from repo docs (${GITHUB_SHA::7})"
+          git push origin HEAD
+          echo "Wiki updated."
