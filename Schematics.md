@@ -7,14 +7,29 @@ The **File** menu (top bar) imports and exports builds through the
 
 **File → Import schematic…** opens a **thumbnail browser**:
 
-- Every `.schem` / `.schematic` shows as a small isometric preview (loaded
-  lazily, cached).
-- Organise files into **named folders** inside `schematics/` (up to 5 levels
-  deep) — click a folder to enter, `..` to go up.
+- Every `.schem` / `.schematic` shows as a small **3-D preview** — real block
+  models, rendered once into a cached texture and anti-aliased so they read
+  cleanly at thumbnail size (big builds stay solid, never a sparse mesh).
 - Click a file for a big preview with size, block count, and any blocks this
   game version can't map (imported as air, counted honestly).
 - **Import** loads it onto the clipboard, named after the file, ready to place
   like any copy.
+
+### Organising in-editor
+
+- **Create folders without leaving the game:** the **+ Folder** toolbar button
+  makes and names a folder in the current directory (up to 5 levels deep);
+  click a folder to enter, `..` to go up.
+- **Folder icons:** each folder shows a small **pencil badge** in its corner —
+  click it to pick an icon from a set of drawn pictographs (Vehicles, Trees,
+  Vegetation, Houses, Buildings, Roads, Traffic, Construction, Water, Terrain,
+  Furniture, Lighting, Rail, Marina, Favorites).
+- **Favorites:** the **star** in a cell's corner favorites a schematic *or* a
+  folder; the **Favorites** toolbar toggle shows only your favorites across the
+  whole tree.
+
+Icons and favorites are saved in `schematics/.compbuild-index.json`, so they
+persist between sessions and travel with the folder.
 
 ## Export
 

@@ -77,10 +77,12 @@ Paper server with the companion plugin.</p>
 <ul>
 <li><strong>Selections &amp; block ops</strong> — box-select, fill, delete, replace, copy/cut/paste,
   all undoable.</li>
-<li><strong>Terrain sculpting</strong> — twelve brush moves (Raise, Smooth, Cliff, Slope, …)
-  with falloff curves and natural edges.</li>
+<li><strong>Terrain sculpting</strong> — twelve brush moves (Raise, Smooth, Cliff, …) that
+  reuse the terrain's own materials, plus a two-point <strong>Slope</strong> you paint.</li>
 <li><strong>Painting</strong> — re-skin surfaces or fill volumes with a single material,
   a weighted <strong>noise palette</strong>, or a <strong>gradient</strong>.</li>
+<li><strong>Scatter</strong> — paint trees, rocks, foliage and props across terrain with a
+  weighted palette, density, spacing, clump blobs, masks, and a live preview.</li>
 <li><strong>Paths</strong> — roads, walls, drapes, smooth curves, and clipboard <strong>stamps</strong>
   along clicked points, with a live textured preview.</li>
 <li><strong>Geometry</strong> — exact shapes (lines, circles, spheres, domes, cylinders…)
@@ -88,8 +90,8 @@ Paper server with the companion plugin.</p>
 <li><strong>Transform</strong> — rotate a clipboard to <em>any</em> angle, scale per axis, mirror,
   grid-snap, and place a textured ghost.</li>
 <li><strong>Biomes</strong> — paint biomes with the same noise patterns, undoably.</li>
-<li><strong>Schematics</strong> — import/export <code>.schem</code> / <code>.schematic</code> through a thumbnail
-  browser with named folders.</li>
+<li><strong>Schematics</strong> — import/export <code>.schem</code> / <code>.schematic</code> through a 3-D
+  thumbnail browser with in-editor folders, icons, and favorites.</li>
 <li><strong>Materials</strong> — searchable picker (Air included), recent materials, and
   <strong>named palettes</strong> you save and reuse.</li>
 <li><strong>Multiplayer</strong> — a <strong>Paper server plugin</strong> applies edits with authority,
@@ -252,8 +254,8 @@ one‑line <strong>?</strong> description on the Tool Options title bar. Good fi
 <li><strong><a href="#schematics">Schematics</a></strong> — import and export builds.</li>
 <li><strong><a href="#multiplayer-paper">Multiplayer (Paper)</a></strong> — edit on a server.</li>
 </ul></div></section><section id="controls"><div class="page"><h1 id="controls">Controls</h1>
-<p>All keys are rebindable in <strong>Options → Controls → Compbuild Studio Tools</strong>
-(the mod has its own category). Defaults:</p>
+<p>All keys are rebindable in <strong>Options → Controls → Studio Tools</strong> (the mod has
+its own dedicated category, separate from the vanilla binds). Defaults:</p>
 <table>
 <thead>
 <tr>
@@ -348,6 +350,10 @@ bind them to any key in Options → Controls.</p>
 </table>
 <p>There's no crosshair — the <strong>block you're aiming at is outlined</strong>; that's your
 pointer. To click a tool or panel, release the cursor with <strong>Esc</strong> or <strong>Left-Alt</strong>.</p>
+<p><strong>Chat from the editor:</strong> press <strong>T</strong> (or <strong>/</strong> for a command) to open the
+normal chat screen; reopen the editor afterward with <strong>Home</strong>. Edit feedback
+shows as a short <strong>toast in the status bar</strong> rather than in chat, so the log
+stays clean.</p>
 <h2 id="cursor-mode-clicks">Cursor-mode clicks</h2>
 <table>
 <thead>
@@ -430,6 +436,12 @@ pointer. To click a tool or panel, release the cursor with <strong>Esc</strong> 
 <td>Depth</td>
 </tr>
 <tr>
+<td>Scatter</td>
+<td>Size (radius)</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
 <td>Path</td>
 <td>Width</td>
 <td>Height</td>
@@ -467,14 +479,26 @@ under <strong>More…</strong>.</p>
 <h2 id="sculpt-terrain">Sculpt (terrain)</h2>
 <p>Raises, lowers, and reshapes terrain under the brush. Pick a <strong>Type</strong> from the
 grid (icons + hover text), set <strong>Radius</strong> and <strong>Intensity</strong>, then click or
-<strong>hold</strong> on the ground.</p>
+<strong>hold</strong> on the ground. Sculpting is <strong>terrain-based</strong>: raised ground reuses
+each column's own surface block (grass stays grass, sand stays sand), so the
+picked material never changes a sculpt result.</p>
 <p><strong>Types (12):</strong> Raise · Lower · Smooth · Flatten · Noise · Erode · <strong>Extrude</strong>
-(pull the footprint straight up, hard-edged) · <strong>Cliff</strong> (terrace into flat
-steps) · <strong>Roughen</strong> (light scattered pitting) · <strong>Distort</strong> (rolling
-world-anchored waves) · <strong>Shatter</strong> (break into sunken slabs along Voronoi
-seams) · <strong>Slope</strong> — a ramp you can <strong>press-and-drag</strong> from one end to the
-other (live preview, sweep left/right) or place with <strong>two clicks</strong> (one end,
-then the other); a single graded ramp connects the points.</p>
+(pull the footprint straight up, hard-edged) · <strong>Cliff</strong> (terrace toward the
+nearest step — low ground <strong>builds up</strong>, high ground <strong>shaves down</strong>, so it
+shapes plateaus rather than only carving) · <strong>Roughen</strong> (light scattered
+pitting) · <strong>Distort</strong> (rolling world-anchored waves) · <strong>Shatter</strong> (break into
+sunken slabs along Voronoi seams) · <strong>Slope</strong> (see below).</p>
+<h3 id="slope">Slope</h3>
+<p>A two-step grade tool:</p>
+<ol>
+<li><strong>Click point 1</strong>, then <strong>click point 2</strong> to set the slope's <strong>angle</strong> (any
+   angle — a <strong>press-and-drag</strong> from point 1 sets point 2 as you release).</li>
+<li>Now <strong>paint</strong> with the brush: every dab fills low columns up and shaves high
+   columns down onto that inclined plane, so you can extend the same grade in
+   any direction — left, right, past either end.</li>
+</ol>
+<p>The Tool Options panel shows the current state (<code>Click point 1</code> → the live
+angle) and a <strong>Reset slope points</strong> button to start a new grade.</p>
 <p><strong>Falloff</strong> is a curve picker: <strong>Flat</strong>, <strong>Smooth</strong> (rounded dome), <strong>Linear</strong>,
 <strong>Plateau</strong> (flat top then drop), <strong>Spike</strong>, <strong>Round</strong> (spherical cap). <strong>Edge</strong>
 = <strong>Natural</strong> (organically wobbled rim, never a perfect circle) or <strong>Exact</strong>.
@@ -492,6 +516,28 @@ then the other); a single graded ramp connects the points.</p>
 <h2 id="paint-brush">Paint Brush</h2>
 <p>Freehand block placing: paints your material wherever you click or drag, using
 the current brush shape and radius.</p>
+<h2 id="scatter">Scatter</h2>
+<p>Scatters objects across terrain <strong>inside the brush</strong> — the natural-detail tool
+for trees, rocks, foliage and props.</p>
+<ul>
+<li><strong>Palette:</strong> build a list of objects to scatter from three sources —
+  <strong>+ Clipboard copy</strong> (whatever you last copied), <strong>+ Schematic file</strong> (opens
+  the browser to add a <code>.schem</code>), and <strong>+ Single block</strong> (grass, flowers, …).
+  Each object has a <strong>weight</strong> (how often it's picked) and can be toggled off
+  by clicking its thumbnail.</li>
+<li><strong>Brush:</strong> <strong>Density</strong> (sparse / medium / dense), <strong>Size</strong> (radius),
+  <strong>Spacing</strong> (minimum gap between placements), <strong>Random turn</strong> (random
+  quarter-turns), and <strong>Mirror</strong>.</li>
+<li><strong>Clump:</strong> single blocks grow into <strong>blobs</strong> — set the clump size and a
+  <strong>Round</strong> or <strong>Square</strong> shape — so grass and flowers land in natural patches
+  that hug the surface instead of lone blocks.</li>
+<li><strong>Place on:</strong> an optional <strong>mask</strong> restricting placement to chosen surface
+  blocks (e.g. only grass); default is any surface.</li>
+<li><strong>Live preview:</strong> the panel shows a <strong>genuine simulated dab</strong> — a pad the
+  brush's exact radius with the real planner run over it — so density, spacing,
+  turning and clumping read true before you paint.</li>
+</ul>
+<p><strong>Paint to place</strong> — each stroke lands as one <strong>undoable</strong> edit (<strong>Ctrl+Z</strong>).</p>
 <h2 id="gradient">Gradient</h2>
 <p>A Photoshop-style dithered fade between <strong>two material swatches</strong> (A → B).
 Choose <strong>Linear</strong> or <strong>Radial</strong>, run it along the selection's tallest axis or
@@ -631,15 +677,29 @@ it, so a cut-off label or value (e.g. in PROPS) gets room.</p></div></section><s
 <h2 id="import">Import</h2>
 <p><strong>File → Import schematic…</strong> opens a <strong>thumbnail browser</strong>:</p>
 <ul>
-<li>Every <code>.schem</code> / <code>.schematic</code> shows as a small isometric preview (loaded
-  lazily, cached).</li>
-<li>Organise files into <strong>named folders</strong> inside <code>schematics/</code> (up to 5 levels
-  deep) — click a folder to enter, <code>..</code> to go up.</li>
+<li>Every <code>.schem</code> / <code>.schematic</code> shows as a small <strong>3-D preview</strong> — real block
+  models, rendered once into a cached texture and anti-aliased so they read
+  cleanly at thumbnail size (big builds stay solid, never a sparse mesh).</li>
 <li>Click a file for a big preview with size, block count, and any blocks this
   game version can't map (imported as air, counted honestly).</li>
 <li><strong>Import</strong> loads it onto the clipboard, named after the file, ready to place
   like any copy.</li>
 </ul>
+<h3 id="organising-in-editor">Organising in-editor</h3>
+<ul>
+<li><strong>Create folders without leaving the game:</strong> the <strong>+ Folder</strong> toolbar button
+  makes and names a folder in the current directory (up to 5 levels deep);
+  click a folder to enter, <code>..</code> to go up.</li>
+<li><strong>Folder icons:</strong> each folder shows a small <strong>pencil badge</strong> in its corner —
+  click it to pick an icon from a set of drawn pictographs (Vehicles, Trees,
+  Vegetation, Houses, Buildings, Roads, Traffic, Construction, Water, Terrain,
+  Furniture, Lighting, Rail, Marina, Favorites).</li>
+<li><strong>Favorites:</strong> the <strong>star</strong> in a cell's corner favorites a schematic <em>or</em> a
+  folder; the <strong>Favorites</strong> toolbar toggle shows only your favorites across the
+  whole tree.</li>
+</ul>
+<p>Icons and favorites are saved in <code>schematics/.compbuild-index.json</code>, so they
+persist between sessions and travel with the folder.</p>
 <h2 id="export">Export</h2>
 <p><strong>File → Save clipboard as .schem…</strong> asks for a <strong>name</strong> and writes a <strong>Sponge
 v2 <code>.schem</code></strong> (the widely-supported schematic format). The clipboard card shows the

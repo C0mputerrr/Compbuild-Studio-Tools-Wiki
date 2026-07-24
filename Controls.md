@@ -1,7 +1,7 @@
 # Controls
 
-All keys are rebindable in **Options → Controls → Compbuild Studio Tools**
-(the mod has its own category). Defaults:
+All keys are rebindable in **Options → Controls → Studio Tools** (the mod has
+its own dedicated category, separate from the vanilla binds). Defaults:
 
 | Key | Action |
 | --- | ------ |
@@ -35,6 +35,11 @@ bind them to any key in Options → Controls.
 There's no crosshair — the **block you're aiming at is outlined**; that's your
 pointer. To click a tool or panel, release the cursor with **Esc** or **Left-Alt**.
 
+**Chat from the editor:** press **T** (or **/** for a command) to open the
+normal chat screen; reopen the editor afterward with **Home**. Edit feedback
+shows as a short **toast in the status bar** rather than in chat, so the log
+stays clean.
+
 ## Cursor-mode clicks
 
 | Input | Action |
@@ -60,6 +65,7 @@ pointer. To click a tool or panel, release the cursor with **Esc** or **Left-Alt
 | ---- | ----- | ------------- | ------------ |
 | Sculpt | Radius | Strength | — |
 | Paint | Radius | — | Depth |
+| Scatter | Size (radius) | — | — |
 | Path | Width | Height | Slack / Stamp spacing |
 | Array | — | — | Copy count |
 

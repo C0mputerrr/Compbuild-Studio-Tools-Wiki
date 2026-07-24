@@ -28,15 +28,29 @@ under **More…**.
 
 Raises, lowers, and reshapes terrain under the brush. Pick a **Type** from the
 grid (icons + hover text), set **Radius** and **Intensity**, then click or
-**hold** on the ground.
+**hold** on the ground. Sculpting is **terrain-based**: raised ground reuses
+each column's own surface block (grass stays grass, sand stays sand), so the
+picked material never changes a sculpt result.
 
 **Types (12):** Raise · Lower · Smooth · Flatten · Noise · Erode · **Extrude**
-(pull the footprint straight up, hard-edged) · **Cliff** (terrace into flat
-steps) · **Roughen** (light scattered pitting) · **Distort** (rolling
-world-anchored waves) · **Shatter** (break into sunken slabs along Voronoi
-seams) · **Slope** — a ramp you can **press-and-drag** from one end to the
-other (live preview, sweep left/right) or place with **two clicks** (one end,
-then the other); a single graded ramp connects the points.
+(pull the footprint straight up, hard-edged) · **Cliff** (terrace toward the
+nearest step — low ground **builds up**, high ground **shaves down**, so it
+shapes plateaus rather than only carving) · **Roughen** (light scattered
+pitting) · **Distort** (rolling world-anchored waves) · **Shatter** (break into
+sunken slabs along Voronoi seams) · **Slope** (see below).
+
+### Slope
+
+A two-step grade tool:
+
+1. **Click point 1**, then **click point 2** to set the slope's **angle** (any
+   angle — a **press-and-drag** from point 1 sets point 2 as you release).
+2. Now **paint** with the brush: every dab fills low columns up and shaves high
+   columns down onto that inclined plane, so you can extend the same grade in
+   any direction — left, right, past either end.
+
+The Tool Options panel shows the current state (`Click point 1` → the live
+angle) and a **Reset slope points** button to start a new grade.
 
 **Falloff** is a curve picker: **Flat**, **Smooth** (rounded dome), **Linear**,
 **Plateau** (flat top then drop), **Spike**, **Round** (spherical cap). **Edge**
@@ -58,6 +72,30 @@ Re-skins the terrain **Surface** (a few layers deep) or fills the brush
 
 Freehand block placing: paints your material wherever you click or drag, using
 the current brush shape and radius.
+
+## Scatter
+
+Scatters objects across terrain **inside the brush** — the natural-detail tool
+for trees, rocks, foliage and props.
+
+- **Palette:** build a list of objects to scatter from three sources —
+  **+ Clipboard copy** (whatever you last copied), **+ Schematic file** (opens
+  the browser to add a `.schem`), and **+ Single block** (grass, flowers, …).
+  Each object has a **weight** (how often it's picked) and can be toggled off
+  by clicking its thumbnail.
+- **Brush:** **Density** (sparse / medium / dense), **Size** (radius),
+  **Spacing** (minimum gap between placements), **Random turn** (random
+  quarter-turns), and **Mirror**.
+- **Clump:** single blocks grow into **blobs** — set the clump size and a
+  **Round** or **Square** shape — so grass and flowers land in natural patches
+  that hug the surface instead of lone blocks.
+- **Place on:** an optional **mask** restricting placement to chosen surface
+  blocks (e.g. only grass); default is any surface.
+- **Live preview:** the panel shows a **genuine simulated dab** — a pad the
+  brush's exact radius with the real planner run over it — so density, spacing,
+  turning and clumping read true before you paint.
+
+**Paint to place** — each stroke lands as one **undoable** edit (**Ctrl+Z**).
 
 ## Gradient
 

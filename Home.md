@@ -13,10 +13,12 @@ Paper server with the companion plugin.
 
 - **Selections & block ops** — box-select, fill, delete, replace, copy/cut/paste,
   all undoable.
-- **Terrain sculpting** — twelve brush moves (Raise, Smooth, Cliff, Slope, …)
-  with falloff curves and natural edges.
+- **Terrain sculpting** — twelve brush moves (Raise, Smooth, Cliff, …) that
+  reuse the terrain's own materials, plus a two-point **Slope** you paint.
 - **Painting** — re-skin surfaces or fill volumes with a single material,
   a weighted **noise palette**, or a **gradient**.
+- **Scatter** — paint trees, rocks, foliage and props across terrain with a
+  weighted palette, density, spacing, clump blobs, masks, and a live preview.
 - **Paths** — roads, walls, drapes, smooth curves, and clipboard **stamps**
   along clicked points, with a live textured preview.
 - **Geometry** — exact shapes (lines, circles, spheres, domes, cylinders…)
@@ -24,8 +26,8 @@ Paper server with the companion plugin.
 - **Transform** — rotate a clipboard to *any* angle, scale per axis, mirror,
   grid-snap, and place a textured ghost.
 - **Biomes** — paint biomes with the same noise patterns, undoably.
-- **Schematics** — import/export `.schem` / `.schematic` through a thumbnail
-  browser with named folders.
+- **Schematics** — import/export `.schem` / `.schematic` through a 3-D
+  thumbnail browser with in-editor folders, icons, and favorites.
 - **Materials** — searchable picker (Air included), recent materials, and
   **named palettes** you save and reuse.
 - **Multiplayer** — a **Paper server plugin** applies edits with authority,
