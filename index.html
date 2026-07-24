@@ -489,16 +489,24 @@ shapes plateaus rather than only carving) · <strong>Roughen</strong> (light sca
 pitting) · <strong>Distort</strong> (rolling world-anchored waves) · <strong>Shatter</strong> (break into
 sunken slabs along Voronoi seams) · <strong>Slope</strong> (see below).</p>
 <h3 id="slope">Slope</h3>
-<p>A two-step grade tool:</p>
+<p>Grades a <strong>finite, tilted rectangular surface</strong> — ideal for roads, highways,
+railways, embankments, retaining walls, canals, mountain passes and runways.
+Best used in <strong>cursor mode</strong> (the tool follows the mouse cursor):</p>
 <ol>
-<li><strong>Click point 1</strong>, then <strong>click point 2</strong> to set the slope's <strong>angle</strong> (any
-   angle — a <strong>press-and-drag</strong> from point 1 sets point 2 as you release).</li>
-<li>Now <strong>paint</strong> with the brush: every dab fills low columns up and shaves high
-   columns down onto that inclined plane, so you can extend the same grade in
-   any direction — left, right, past either end.</li>
+<li><strong>Left-click</strong> to set the <strong>origin</strong>.</li>
+<li><strong>Move the cursor</strong> forward/back (and aim at higher/lower ground) to set the
+   <strong>direction</strong> and <strong>steepness</strong> — a translucent tilted plane previews it.</li>
+<li><strong>Hold right-click</strong> to lock the angle and start sizing. While held:
+   - move <strong>forward / back</strong> to set the <strong>length</strong>,
+   - move <strong>left / right</strong> to stretch the <strong>width</strong> — the angle stays exactly
+     the same, so it behaves like stretching one rectangular plane rather than
+     drawing separate ramps.</li>
+<li><strong>Release right-click</strong> to commit the whole surface as one undoable edit.</li>
+<li><strong>Left-click again</strong> to start a new slope.</li>
 </ol>
-<p>The Tool Options panel shows the current state (<code>Click point 1</code> → the live
-angle) and a <strong>Reset slope points</strong> button to start a new grade.</p>
+<p>The Tool Options panel shows the live <strong>angle</strong>, <strong>height difference (Δh)</strong>,
+<strong>run</strong> and <strong>Euclidean distance</strong>, plus a <strong>Width</strong> slider and a <strong>Reset</strong>
+button. Very large slopes are batched into a single efficient edit.</p>
 <p><strong>Falloff</strong> is a curve picker: <strong>Flat</strong>, <strong>Smooth</strong> (rounded dome), <strong>Linear</strong>,
 <strong>Plateau</strong> (flat top then drop), <strong>Spike</strong>, <strong>Round</strong> (spherical cap). <strong>Edge</strong>
 = <strong>Natural</strong> (organically wobbled rim, never a perfect circle) or <strong>Exact</strong>.

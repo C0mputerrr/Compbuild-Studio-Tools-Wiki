@@ -41,16 +41,24 @@ sunken slabs along Voronoi seams) · **Slope** (see below).
 
 ### Slope
 
-A two-step grade tool:
+Grades a **finite, tilted rectangular surface** — ideal for roads, highways,
+railways, embankments, retaining walls, canals, mountain passes and runways.
+Best used in **cursor mode** (the tool follows the mouse cursor):
 
-1. **Click point 1**, then **click point 2** to set the slope's **angle** (any
-   angle — a **press-and-drag** from point 1 sets point 2 as you release).
-2. Now **paint** with the brush: every dab fills low columns up and shaves high
-   columns down onto that inclined plane, so you can extend the same grade in
-   any direction — left, right, past either end.
+1. **Left-click** to set the **origin**.
+2. **Move the cursor** forward/back (and aim at higher/lower ground) to set the
+   **direction** and **steepness** — a translucent tilted plane previews it.
+3. **Hold right-click** to lock the angle and start sizing. While held:
+   - move **forward / back** to set the **length**,
+   - move **left / right** to stretch the **width** — the angle stays exactly
+     the same, so it behaves like stretching one rectangular plane rather than
+     drawing separate ramps.
+4. **Release right-click** to commit the whole surface as one undoable edit.
+5. **Left-click again** to start a new slope.
 
-The Tool Options panel shows the current state (`Click point 1` → the live
-angle) and a **Reset slope points** button to start a new grade.
+The Tool Options panel shows the live **angle**, **height difference (Δh)**,
+**run** and **Euclidean distance**, plus a **Width** slider and a **Reset**
+button. Very large slopes are batched into a single efficient edit.
 
 **Falloff** is a curve picker: **Flat**, **Smooth** (rounded dome), **Linear**,
 **Plateau** (flat top then drop), **Spike**, **Round** (spherical cap). **Edge**
